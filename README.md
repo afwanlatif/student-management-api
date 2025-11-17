@@ -62,12 +62,12 @@ The project supports two environments:
    PORT=3000
    DB_NAME=studentDB
    DB_USER=postgres
-   DB_PASSWORD=root
+   DB_PASSWORD=your_secure_password
    DB_HOST=db
    DB_PORT=5432
    DB_DIALECT=postgres
-   PGADMIN_EMAIL=admin@example.com
-   PGADMIN_PASSWORD=admin123
+   PGADMIN_EMAIL=your_email@example.com
+   PGADMIN_PASSWORD=your_secure_admin_password
    ```
 
 2. **Run with Docker Compose (IMPORTANT - use --env-file flag):**
