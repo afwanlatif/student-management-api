@@ -1,0 +1,30 @@
+{
+  "name": "nadsoft_machine_test",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "dotenv -e .env.local tsx watch src/app.ts",
+    "start": "dotenv -e .env.local tsx src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^24.10.1",
+    "@types/sequelize": "^6.12.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "dotenv-cli": "^7.4.2"
+  }
+}
