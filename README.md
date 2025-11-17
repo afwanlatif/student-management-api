@@ -60,20 +60,22 @@ The project supports two environments:
 1. **Create `.env.docker` file:**
    ```env
    PORT=3000
-   DB_NAME=your_database_name
-   DB_USER=your_username
-   DB_PASSWORD=your_password
+   DB_NAME=studentDB
+   DB_USER=postgres
+   DB_PASSWORD=root
    DB_HOST=db
    DB_PORT=5432
    DB_DIALECT=postgres
-   PGADMIN_EMAIL=your_email@example.com
-   PGADMIN_PASSWORD=your_pgadmin_password
+   PGADMIN_EMAIL=admin@example.com
+   PGADMIN_PASSWORD=admin123
    ```
 
-2. **Run with Docker Compose:**
+2. **Run with Docker Compose (IMPORTANT - use --env-file flag):**
    ```bash
-   docker-compose up --build
+   docker-compose --env-file .env.docker up --build
    ```
+   
+   **Note:** The `--env-file .env.docker` flag is required to properly load environment variables for Docker Compose variable substitution.
 
 3. **Stop containers:**
    ```bash
@@ -88,7 +90,7 @@ The project supports two environments:
 ## 📝 Available Scripts
 
 - `npm run dev` - Run app locally with local DB
-- `docker-compose up` - Start full Docker stack
+- `docker-compose --env-file .env.docker up` - Start full Docker stack
 - `docker-compose down` - Stop Docker containers
 
 ## 🌐 Access Points
@@ -101,8 +103,8 @@ The project supports two environments:
 - **API Server:** `http://localhost:3000`
 - **Database:** PostgreSQL on localhost:5433
 - **pgAdmin:** `http://localhost:8080`
-  - Email: your_email@example.com
-  - Password: your_pgadmin_password
+  - Email: admin@example.com
+  - Password: admin123
 
 ## 🐛 Troubleshooting
 
@@ -115,12 +117,95 @@ The project supports two environments:
 2. **Docker Development:**
    - Check containers: `docker ps`
    - View logs: `docker-compose logs db`
-   - Reset volumes: `docker-compose down -v && docker-compose up --build`
+   - Reset volumes: `docker-compose down -v && docker-compose --env-file .env.docker up --build`
+   - **pgAdmin not starting:** Ensure you use `--env-file .env.docker` flag with docker-compose commands
 
 ### Common Fixes
 
 - **Port conflicts:** Change PORT in .env files
 - **Module issues:** Delete node_modules and run `npm install`
+
+## 🔌 API Endpoints
+
+### Student Management
+
+#### Create Student
+- **POST** `/student/add`
+- **Body:**
+```json
+{
+  "fullname": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 20,
+  "dob": "2003-05-15"
+}
+```
+
+#### Get All Students
+- **GET** `/student/getAll?page=1`
+- **Query Parameters:** `page` (optional, default: 1)
+
+#### Get Single Student
+- **GET** `/student/get/:id`
+- **Example:** `/student/get/1`
+
+#### Update Student
+- **PUT** `/student/update/:id`
+- **Body:**
+```json
+{
+  "fullname": "John Smith",
+  "email": "john.smith@example.com",
+  "age": 21,
+  "dob": "2003-05-15"
+}
+```
+
+#### Delete Student (Soft Delete)
+- **DELETE** `/student/delete/:id`
+- **Example:** `/student/delete/1`
+
+### Marks Management
+
+#### Add Marks
+- **POST** `/marks/add`
+- **Body:**
+```json
+{
+  "studentId": 1,
+  "subject": "Mathematics",
+  "score": 85
+}
+```
+
+#### Get Student Marks
+- **GET** `/marks/student/:id`
+- **Example:** `/marks/student/1`
+
+#### Update Marks
+- **PUT** `/marks/update/:id`
+- **Body:**
+```json
+{
+  "subject": "Mathematics",
+  "score": 90
+}
+```
+
+#### Delete Marks
+- **DELETE** `/marks/delete/:id`
+- **Example:** `/marks/delete/1`
+
+### Response Format
+
+All endpoints return JSON responses in this format:
+```json
+{
+  "message": "Success/Error message",
+  "data": {}, // Response data (varies by endpoint)
+  "metadata": {} // Pagination info (for list endpoints)
+}
+```
 
 ## 📁 Project Structure
 
