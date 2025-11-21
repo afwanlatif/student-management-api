@@ -50,10 +50,13 @@ The project supports two environments:
    npm install
    ```
 
-4. **Run locally:**
-   ```bash
-   npm run dev
-   ```
+4. *Create database tables:*
+   bash
+   npm run create-tables
+   
+5. *Run locally:*
+   bash
+   npm run dev   
 
 ### Option B: Docker Development
 
